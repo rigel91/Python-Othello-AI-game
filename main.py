@@ -1,9 +1,12 @@
 import pygame
+from board import Board
 
-WIDTH, HEIGHT, FPS = 1000, 800, 60
+WIDTH, HEIGHT, FPS = 1350, 850, 60
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Othello')
+
+board = Board()
 
 def main():
     run = True
@@ -17,8 +20,10 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         
+        board.createBoard(WINDOW)
         #framerate
         clock.tick(FPS)
+
 
     pygame.quit()
 
