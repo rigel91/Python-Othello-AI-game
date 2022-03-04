@@ -1,12 +1,22 @@
 import pygame
-from board import Board
+from gamestate import GameState
+from piece import Piece
 
 WIDTH, HEIGHT, FPS = 1350, 850, 60
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Othello')
 
-board = Board()
+game = GameState(WINDOW)
+
+def getRowCol(pos):
+    #between 25 and 825 for both rows and columns
+    col, row = pos
+    #boundary of board
+    if col > 25 and col < 825 and row > 25 and row < 825:
+        x = (row-25)//100
+        y = (col-25)//100
+    return x, y
 
 def main():
     run = True
@@ -16,11 +26,26 @@ def main():
     while run:
         #check for any events that happened
         for event in pygame.event.get():
+            #get the row and column from mouse click
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                position = pygame.mouse.get_pos()
+                row, col = getRowCol(position)
+                #print(row, col)
+                if game.turn == "WHITE":
+                    piece = Piece(row, col, "WHITE")
+                    piece.drawCircle(WINDOW)
+                    game.changeTurn()
+                else:
+                    piece = Piece(row, col, "BLACK")
+                    piece.drawCircle(WINDOW)
+                    game.changeTurn()
+                
+
             #when player presses quit
             if event.type == pygame.QUIT:
                 run = False
         
-        board.createBoard(WINDOW)
+        game.update()
         #framerate
         clock.tick(FPS)
 
