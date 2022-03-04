@@ -30,17 +30,14 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
                 row, col = getRowCol(position)
-                #print(row, col)
-                if game.turn == "WHITE":
-                    piece = Piece(row, col, "WHITE")
-                    piece.drawCircle(WINDOW)
-                    game.changeTurn()
-                else:
-                    piece = Piece(row, col, "BLACK")
-                    piece.drawCircle(WINDOW)
-                    game.changeTurn()
                 
+                #player takes their turn
+                game.takeTurn(row, col, WINDOW)
 
+            #when player presses spacebar                
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    game.startGame(WINDOW)                           
             #when player presses quit
             if event.type == pygame.QUIT:
                 run = False
@@ -48,7 +45,6 @@ def main():
         game.update()
         #framerate
         clock.tick(FPS)
-
 
     pygame.quit()
 

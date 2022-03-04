@@ -10,7 +10,19 @@ DARKGRAY = (80, 80, 80)
 WHITE = (255, 255, 255)
 
 class Board:
+    def __init__(self):
+        self.numOfWhitePieces = 0
+        self.numOfBlackPieces = 0
+        self.boardPosition = []
+
     def createBoard(self, window):
+        #create the virtual board
+        for row in range(0,8):
+            self.boardPosition.append([])
+            for col in range(0,8):
+                self.boardPosition[row].append(None)
+
+        #fill the background to green
         window.fill(GREEN)
         
         #Left Border
@@ -31,6 +43,12 @@ class Board:
             pygame.draw.line(window, BLACK, (start + i*100, 0), (start + i*100, HEIGHT), lineSize)
 
         #draw right side panel
-        pygame.draw.rect(window, GRAY, (850, 0, 500, 850))                                        
+        pygame.draw.rect(window, GRAY, (850, 0, 500, 850))
 
-        pygame.display.update()
+    def createSidePanel(self):
+        pass
+
+    def printBoard(self):
+        print("number of white:", self.numOfWhitePieces, "/", "num of black:", self.numOfBlackPieces)
+        for row in range(0,8):
+            print(self.boardPosition[row])
