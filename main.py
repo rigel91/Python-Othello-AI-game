@@ -21,7 +21,6 @@ def getRowCol(pos):
 def main():
     run = True
     clock = pygame.time.Clock()
-
     #run game loop
     while run:
         #check for any events that happened
@@ -47,5 +46,7 @@ def main():
         clock.tick(FPS)
 
     pygame.quit()
+
+
 
 main()

@@ -45,10 +45,10 @@ class Board:
         #draw right side panel
         pygame.draw.rect(window, GRAY, (850, 0, 500, 850))
 
-    def createSidePanel(self):
-        pass
-
     def printBoard(self):
         print("number of white:", self.numOfWhitePieces, "/", "num of black:", self.numOfBlackPieces)
         for row in range(0,8):
             print(self.boardPosition[row])
+
+    def getValidMoves(self, board, turn):
+        pass
