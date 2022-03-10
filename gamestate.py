@@ -33,15 +33,70 @@ class GameState:
         pygame.display.update()
 
     def takeTurn(self, row, col, window):
-        #TODO: if valid move then place piece down; need to create a flipped function
+        #TODO: if valid move then place piece down; need to create a flipped function        
+        newPiece = Piece(row, col, self.turn)
         if self.board.boardPosition[row][col] == None:
-            self.board.boardPosition[row][col] = Piece(row, col, self.turn)
-            if self.turn == "WHITE":
-                self.board.numOfWhitePieces += 1
-            else:
-                self.board.numOfBlackPieces += 1
-            self.board.boardPosition[row][col].drawCircle(window)
-            self.changeTurn()
+            #check up
+            if self.board.checkFlip(newPiece, -1, 0):
+                print("valid1")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+            #check top right
+            if self.board.checkFlip(newPiece, -1, 1):
+                print("valid2")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+            #check right
+            if self.board.checkFlip(newPiece, 0, 1):
+                print("valid3")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+            #check bottom right
+            if self.board.checkFlip(newPiece, 1, 1):
+                print("valid4")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+            #check down
+            if self.board.checkFlip(newPiece, 1, 0):
+                print("valid5")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+            #check bottom left
+            if self.board.checkFlip(newPiece, 1, -1):
+                print("valid6")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+            #check left
+            if self.board.checkFlip(newPiece, 0, -1):
+                print("valid7")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+            #check top left
+            if self.board.checkFlip(newPiece, -1, -1):
+                print("valid8")
+                self.placePiece(row, col, newPiece, window)
+                #flip pieces
+                pass
+        else:
+            #cant overlap pieces, so we dont want to change turns
+            return
+    
+    def placePiece(self, row, col, piece, window):
+        #put piece on board, draw piece and change turns
+        self.board.boardPosition[row][col] = piece
+        if self.turn == "WHITE":
+            self.board.numOfWhitePieces += 1
+        else:
+            self.board.numOfBlackPieces += 1
+        self.board.boardPosition[row][col].drawCircle(window)
+        self.changeTurn()
 
     def changeTurn(self):
         if self.turn == "BLACK":

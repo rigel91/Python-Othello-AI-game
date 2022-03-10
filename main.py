@@ -10,6 +10,8 @@ pygame.display.set_caption('Othello')
 game = GameState(WINDOW)
 
 def getRowCol(pos):
+    x = -5
+    y = -5
     #between 25 and 825 for both rows and columns
     col, row = pos
     #boundary of board
@@ -31,7 +33,7 @@ def main():
                 row, col = getRowCol(position)
                 
                 #player takes their turn
-                game.takeTurn(row, col, WINDOW)
+                game.takeTurn(row, col, WINDOW) 
 
             #when player presses spacebar                
             if event.type == pygame.KEYDOWN:

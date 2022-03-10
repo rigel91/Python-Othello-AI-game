@@ -1,3 +1,4 @@
+from linecache import checkcache
 import pygame
 from piece import Piece
 
@@ -49,6 +50,34 @@ class Board:
         print("number of white:", self.numOfWhitePieces, "/", "num of black:", self.numOfBlackPieces)
         for row in range(0,8):
             print(self.boardPosition[row])
+
+    def checkFlip(self, piece, checkRow, checkCol):
+        opposingPiece = ""
+        if piece.color == "WHITE":
+            opposingPiece = "BLACK"
+        else:
+            opposingPiece = "WHITE"
+
+        row = piece.row
+        col = piece.column
+        if (row + checkRow < 0) or (row + checkRow >= 8) or (col + checkCol < 0) or (col + checkCol >= 8):            
+            return False
+
+        if self.boardPosition[row + checkRow][col + checkCol] != None and self.boardPosition[row + checkRow][col + checkCol].color == opposingPiece:            
+            while (row >= 0) and (row < 8) and (col >= 0) and (col < 8):
+                row += checkRow
+                col += checkCol                
+
+                #TODO: there is an error here with list out of range
+                if (self.boardPosition[row][col] == None):
+                    print (row, col, ";", checkRow, checkCol)
+                    return False
+                if self.boardPosition[row][col].color == piece.color:
+                    return True
+                else:
+                    #keep looping as we have encountered an opponent piece
+                    pass                    
+        return False
 
     def getValidMoves(self, board, turn):
         pass
