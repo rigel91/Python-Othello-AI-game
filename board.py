@@ -68,11 +68,9 @@ class Board:
                 row += checkRow
                 col += checkCol                
 
-                #TODO: there is an error here with list out of range
-                if (self.boardPosition[row][col] == None):
-                    print (row, col, ";", checkRow, checkCol)
+                if row < 8 and row >= 0 and col < 8 and col >= 0 and (self.boardPosition[row][col] == None):
                     return False
-                if self.boardPosition[row][col].color == piece.color:
+                if row < 8 and row >= 0 and col < 8 and col >= 0 and self.boardPosition[row][col].color == piece.color:
                     return True
                 else:
                     #keep looping as we have encountered an opponent piece

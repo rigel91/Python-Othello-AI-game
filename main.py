@@ -33,7 +33,7 @@ def main():
                 row, col = getRowCol(position)
                 
                 #player takes their turn
-                game.takeTurn(row, col, WINDOW) 
+                game.takeTurn(row, col, WINDOW)
 
             #when player presses spacebar                
             if event.type == pygame.KEYDOWN:

@@ -13,6 +13,7 @@ class GameState:
     def startGame(self, window):
         #when start the game, clear everything in the board
         self.board = Board()
+        self.turn = "BLACK"
         self.board.createBoard(window)
 
         #create, update board position, and draw the circles at the start of the game
@@ -33,57 +34,54 @@ class GameState:
         pygame.display.update()
 
     def takeTurn(self, row, col, window):
+        flag = False
         #TODO: if valid move then place piece down; need to create a flipped function        
         newPiece = Piece(row, col, self.turn)
         if self.board.boardPosition[row][col] == None:
             #check up
             if self.board.checkFlip(newPiece, -1, 0):
                 print("valid1")
-                self.placePiece(row, col, newPiece, window)
+                flag = True
                 #flip pieces
-                pass
             #check top right
             if self.board.checkFlip(newPiece, -1, 1):
                 print("valid2")
-                self.placePiece(row, col, newPiece, window)
+                flag = True
                 #flip pieces
-                pass
             #check right
             if self.board.checkFlip(newPiece, 0, 1):
                 print("valid3")
-                self.placePiece(row, col, newPiece, window)
+                flag = True
                 #flip pieces
-                pass
             #check bottom right
             if self.board.checkFlip(newPiece, 1, 1):
                 print("valid4")
-                self.placePiece(row, col, newPiece, window)
+                flag = True
                 #flip pieces
-                pass
             #check down
             if self.board.checkFlip(newPiece, 1, 0):
                 print("valid5")
-                self.placePiece(row, col, newPiece, window)
+                flag = True
                 #flip pieces
-                pass
             #check bottom left
             if self.board.checkFlip(newPiece, 1, -1):
                 print("valid6")
-                self.placePiece(row, col, newPiece, window)
+                flag = True
                 #flip pieces
-                pass
             #check left
             if self.board.checkFlip(newPiece, 0, -1):
                 print("valid7")
-                self.placePiece(row, col, newPiece, window)
+                flag = True
                 #flip pieces
-                pass
             #check top left
             if self.board.checkFlip(newPiece, -1, -1):
                 print("valid8")
+                flag = True
+                #flip pieces                
+
+            #place the piece once and change the turn
+            if flag:
                 self.placePiece(row, col, newPiece, window)
-                #flip pieces
-                pass
         else:
             #cant overlap pieces, so we dont want to change turns
             return
