@@ -38,12 +38,14 @@ def main():
             #when player presses spacebar                
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    game.startGame(WINDOW)                           
+                    game.startGame(WINDOW)
+                elif event.key == pygame.K_c:
+                    game.board.drawValidMoves(WINDOW, game.turn)
             #when player presses quit
             if event.type == pygame.QUIT:
                 run = False
         
-        game.update()
+        game.update(WINDOW)
         #framerate
         clock.tick(FPS)
 

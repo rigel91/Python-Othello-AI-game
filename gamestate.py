@@ -30,7 +30,10 @@ class GameState:
 
         #self.board.printBoard()
 
-    def update(self):
+    def update(self, window):
+        #TODO: redraw board every update
+        self.board.drawBoard(window)
+        self.board.drawValidMoves(window, self.turn)
         pygame.display.update()
 
     def takeTurn(self, row, col, window):
@@ -82,6 +85,9 @@ class GameState:
             #place the piece once and change the turn
             if flag:
                 self.placePiece(row, col, newPiece, window)
+            else:
+                #no valid moves
+                pass
         else:
             #cant overlap pieces, so we dont want to change turns
             return
