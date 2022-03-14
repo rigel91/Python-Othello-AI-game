@@ -145,3 +145,18 @@ class Board:
         for move in self.validMovesList:
             move.calculatePosition()
             pygame.draw.circle(window, RED, (move.x, move.y), 15)
+
+    def flipPiece(self, piece, checkRow, checkCol):
+        opposingPiece = ""
+        if piece.color == "WHITE":
+            opposingPiece = "BLACK"
+        else:
+            opposingPiece = "WHITE"
+
+        x = piece.row + checkRow
+        y = piece.column + checkCol
+
+        while self.boardPosition[x][y].color == opposingPiece:
+            self.boardPosition[x][y].color = piece.color
+            x += checkRow
+            y += checkCol

@@ -46,41 +46,49 @@ class GameState:
                 print("valid1")
                 flag = True
                 #flip pieces
+                self.board.flipPiece(newPiece, -1, 0)
             #check top right
             if self.board.checkFlip(newPiece, -1, 1):
                 print("valid2")
                 flag = True
                 #flip pieces
+                self.board.flipPiece(newPiece, -1, 1)
             #check right
             if self.board.checkFlip(newPiece, 0, 1):
                 print("valid3")
                 flag = True
                 #flip pieces
+                self.board.flipPiece(newPiece, 0, 1)
             #check bottom right
             if self.board.checkFlip(newPiece, 1, 1):
                 print("valid4")
                 flag = True
                 #flip pieces
+                self.board.flipPiece(newPiece, 1, 1)
             #check down
             if self.board.checkFlip(newPiece, 1, 0):
                 print("valid5")
                 flag = True
                 #flip pieces
+                self.board.flipPiece(newPiece, 1, 0)
             #check bottom left
             if self.board.checkFlip(newPiece, 1, -1):
                 print("valid6")
                 flag = True
                 #flip pieces
+                self.board.flipPiece(newPiece, 1, -1)
             #check left
             if self.board.checkFlip(newPiece, 0, -1):
                 print("valid7")
                 flag = True
                 #flip pieces
+                self.board.flipPiece(newPiece, 0, -1)
             #check top left
             if self.board.checkFlip(newPiece, -1, -1):
                 print("valid8")
                 flag = True
-                #flip pieces                
+                #flip pieces
+                self.board.flipPiece(newPiece, -1, -1)          
 
             #place the piece once and change the turn
             if flag:
