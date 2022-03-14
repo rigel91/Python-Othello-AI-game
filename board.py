@@ -46,7 +46,7 @@ class Board:
         #draw right side panel
         pygame.draw.rect(window, GRAY, (850, 0, 500, 850))
 
-    def drawBoard(self, window):
+    def drawBoard(self, window):        
         #fill the background to green
         window.fill(GREEN)
 
@@ -74,8 +74,7 @@ class Board:
         for r in range(0, 8):
             for c in range(0,8):
                 if self.boardPosition[r][c] != None:
-                    self.boardPosition[r][c].drawCircle(window)
-
+                    self.boardPosition[r][c].drawCircle(window)                                        
 
     def printBoard(self):
         print("number of white:", self.numOfWhitePieces, "/", "num of black:", self.numOfBlackPieces)

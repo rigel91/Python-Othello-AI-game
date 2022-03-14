@@ -1,6 +1,8 @@
+import this
 import pygame
 from board import Board
 from piece import Piece
+from panel import Panel
 
 class GameState:
     def __init__(self, window):
@@ -8,6 +10,7 @@ class GameState:
         self.board.createBoard(window)    
         self.turn = "BLACK"
         #self.startGame()
+        self.panel = Panel()
         
 
     def startGame(self, window):
@@ -34,7 +37,15 @@ class GameState:
         #TODO: redraw board every update
         self.board.drawBoard(window)
         self.board.drawValidMoves(window, self.turn)
+        #self.panel.displayPlayerTurn(window, self.turn)   
+        self.panel.displayAll(window, self.turn, self.board.numOfBlackPieces, self.board.numOfWhitePieces)
         pygame.display.update()
+
+    def addPiece(self):
+        if self.turn == "WHITE":
+            self.board.numOfWhitePieces += 1
+        else:
+            self.board.numOfBlackPieces += 1
 
     def takeTurn(self, row, col, window):
         flag = False
@@ -43,49 +54,41 @@ class GameState:
         if self.board.boardPosition[row][col] == None:
             #check up
             if self.board.checkFlip(newPiece, -1, 0):
-                print("valid1")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, -1, 0)
             #check top right
             if self.board.checkFlip(newPiece, -1, 1):
-                print("valid2")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, -1, 1)
             #check right
             if self.board.checkFlip(newPiece, 0, 1):
-                print("valid3")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, 0, 1)
             #check bottom right
             if self.board.checkFlip(newPiece, 1, 1):
-                print("valid4")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, 1, 1)
             #check down
             if self.board.checkFlip(newPiece, 1, 0):
-                print("valid5")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, 1, 0)
             #check bottom left
             if self.board.checkFlip(newPiece, 1, -1):
-                print("valid6")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, 1, -1)
             #check left
             if self.board.checkFlip(newPiece, 0, -1):
-                print("valid7")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, 0, -1)
             #check top left
             if self.board.checkFlip(newPiece, -1, -1):
-                print("valid8")
                 flag = True
                 #flip pieces
                 self.board.flipPiece(newPiece, -1, -1)          
@@ -102,11 +105,7 @@ class GameState:
     
     def placePiece(self, row, col, piece, window):
         #put piece on board, draw piece and change turns
-        self.board.boardPosition[row][col] = piece
-        if self.turn == "WHITE":
-            self.board.numOfWhitePieces += 1
-        else:
-            self.board.numOfBlackPieces += 1
+        self.board.boardPosition[row][col] = piece        
         self.board.boardPosition[row][col].drawCircle(window)
         self.changeTurn()
 
