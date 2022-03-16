@@ -137,11 +137,11 @@ class Board:
                     #check top left
                     if self.checkFlip(newPiece, -1, -1):
                         self.validMovesList.append(newPiece)
-        #return len(self.validMovesList)
+        return self.validMovesList
     
     def drawValidMoves(self, window, turn):
-        self.getValidMoves(turn)
-        for move in self.validMovesList:
+        moveList = self.getValidMoves(turn)
+        for move in moveList:
             move.calculatePosition()
             pygame.draw.circle(window, RED, (move.x, move.y), 15)
 
