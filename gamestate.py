@@ -9,6 +9,7 @@ class GameState:
         self.board.createBoard(window)    
         self.turn = "BLACK"
         self.panel = Panel()
+        self.drawValid = False
         
 
     def startGame(self, window):
@@ -33,7 +34,8 @@ class GameState:
 
     def update(self, window):
         self.board.drawBoard(window)
-        self.board.drawValidMoves(window, self.turn)
+        if self.drawValid:
+            self.board.drawValidMoves(window, self.turn)        
         self.updateDisplay(window)
         pygame.display.update()
 
@@ -156,6 +158,12 @@ class GameState:
         self.board.numOfBlackPieces = b
 
     def updateDisplay(self, window):
-        self.panel.displayAll(window, self.turn, self.board.numOfBlackPieces, self.board.numOfWhitePieces)
+        self.panel.displayAll(window, self.turn, self.board.numOfBlackPieces, self.board.numOfWhitePieces, self.drawValid)
+
+    def toggleValidMoves(self):
+        if self.drawValid:
+            self.drawValid = False
+        else:
+            self.drawValid = True
 
     

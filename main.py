@@ -13,11 +13,9 @@ def getRowCol(pos):
     x = -5
     y = -5
     #between 25 and 825 for both rows and columns
-    col, row = pos
-    #boundary of board
-    if col > 25 and col < 825 and row > 25 and row < 825:
-        x = (row-25)//100
-        y = (col-25)//100
+    col, row = pos    
+    x = (row-25)//100
+    y = (col-25)//100
     return x, y
 
 def main():
@@ -29,11 +27,19 @@ def main():
         for event in pygame.event.get():
             #get the row and column from mouse click
             if event.type == pygame.MOUSEBUTTONDOWN:
-                position = pygame.mouse.get_pos()
-                row, col = getRowCol(position)
-                
-                #player takes their turn
-                game.takeTurn(row, col, WINDOW)
+                position = pygame.mouse.get_pos()                                
+                #boundary of board
+                if position[0] > 25 and position[0] < 825 and position[1] > 25 and position[1] < 825:
+                    row, col = getRowCol(position)
+                    #player takes their turn
+                    game.takeTurn(row, col, WINDOW)
+                else:
+                    #start button
+                    if position[0] > 899 and position[0] < 1050 and position[1] > 224 and position[1] < 300:
+                        game.startGame(WINDOW)
+                    #valid moves button
+                    elif position[0] > 1099 and position[0] < 1330 and position[1] > 224 and position[1] < 300:
+                        game.toggleValidMoves()
 
             #when player presses spacebar                
             if event.type == pygame.KEYDOWN:
