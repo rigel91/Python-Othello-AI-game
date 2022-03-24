@@ -10,6 +10,10 @@ class GameState:
         self.turn = "BLACK"
         self.panel = Panel()
         self.drawValid = False
+
+        self.player1 = "PLAYER"
+        self.player2 = "PLAYER"
+        self.currentPlayer = "HUMAN"
         
 
     def startGame(self, window):
@@ -158,7 +162,7 @@ class GameState:
         self.board.numOfBlackPieces = b
 
     def updateDisplay(self, window):
-        self.panel.displayAll(window, self.turn, self.board.numOfBlackPieces, self.board.numOfWhitePieces, self.drawValid)
+        self.panel.displayAll(window, self.turn, self.board.numOfBlackPieces, self.board.numOfWhitePieces, self.drawValid, self.player1, self.player2)
 
     def toggleValidMoves(self):
         if self.drawValid:

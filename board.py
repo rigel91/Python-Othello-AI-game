@@ -66,15 +66,16 @@ class Board:
         lineSize = 2
         for i in range(0, 7):
             #horizontal lines
-            pygame.draw.line(window, BLACK, (0, start + i*100), (HEIGHT, start + i*100), lineSize)
+            pygame.draw.line(window, BLACK, (0, start + i*100), (HEIGHT-2, start + i*100), lineSize)
             #vertical lines
             pygame.draw.line(window, BLACK, (start + i*100, 0), (start + i*100, HEIGHT), lineSize)
 
         #draw pieces
-        for r in range(0, 8):
-            for c in range(0,8):
-                if self.boardPosition[r][c] != None:
-                    self.boardPosition[r][c].drawCircle(window)                                        
+        if self.boardPosition != []:
+            for r in range(0, 8):
+                for c in range(0,8):
+                    if self.boardPosition[r][c] != None:
+                        self.boardPosition[r][c].drawCircle(window)                                        
 
     def printBoard(self):
         print("number of white:", self.numOfWhitePieces, "/", "num of black:", self.numOfBlackPieces)
@@ -108,6 +109,8 @@ class Board:
         return False
 
     def getValidMoves(self, turn):
+        if self.boardPosition == []:
+            return
         self.validMovesList = []
         for row in range(0,8):
             for col in range(0,8):
@@ -140,6 +143,8 @@ class Board:
         return self.validMovesList
     
     def drawValidMoves(self, window, turn):
+        if self.boardPosition == []:
+            return
         moveList = self.getValidMoves(turn)
         for move in moveList:
             move.calculatePosition()
